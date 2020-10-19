@@ -1,15 +1,17 @@
 // COMP3220 Final Project
-// James Wu
-// 104038826
+// James Wu, 104038826
+//
 // 
+//
 
 const express = require('express')
 const app = express()
 const port = 3000
-
 const fs = require('fs')
 const readline = require('readline')
 
+
+// opens file and logs in console as well as sends GET request 
 app.get('/',(req,res) => {
     fs.readFile('./Park Name and Addresses.csv',(err,data) => {
         if (err) throw err;
@@ -17,7 +19,6 @@ app.get('/',(req,res) => {
         console.log(CSVToArray(data.toString()));
         res.send(CSVToArray(data.toString()));
     })
-
 })
 app.listen(port,() => {
     console.log(`Example app listening at http://localhost:${port}`)
@@ -35,7 +36,6 @@ function CSVToArray( data, delimiter ){
             "([^\"\\" + delimiter + "\\r\\n]*))"),
             "gi"
         );
-
     var arr = [[]];
     var matches = null;
     while (matches = pattern.exec( data )){
