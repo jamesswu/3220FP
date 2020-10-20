@@ -11,19 +11,29 @@ const fs = require('fs')
 const readline = require('readline')
 
 
+
 // opens file and logs in console as well as sends GET request 
 app.get('/',(req,res) => {
-    fs.readFile('./Park Name and Addresses.csv',(err,data) => {
+    fs.readFile('./3DayParkingInfraction_YTD.csv',(err,data) => {
         if (err) throw err;
+        const dataArray = CSVToArray(data.toString());
 
-        console.log(CSVToArray(data.toString()));
-        res.send(CSVToArray(data.toString()));
+        var str
+        var i
+        for (i = 0; i < 9; i++) {
+            str += dataArray[1][i];
+            if (i < 5) {
+                str+=" ";
+            }
+        }
+        console.log(str);
+        res.send(str);
     })
 })
+
 app.listen(port,() => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
-
 
 // .csv parser
 // returns array
