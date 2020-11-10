@@ -8,12 +8,16 @@ const express = require('express')
 const app = express()
 const port = 3000
 const fs = require('fs')
+const { allowedNodeEnvironmentFlags } = require('process')
 const readline = require('readline')
 
 
-
+app.set('view engine', 'ejs');
 // opens file and logs in console as well as sends GET request 
 app.get('/',(req,res) => {
+    res.render('pages/index');
+})
+app.get('/3dayparkinginfraction',(req,res) => {
     fs.readFile('./3DayParkingInfraction_YTD.csv',(err,data) => {
         if (err) throw err;
         const dataArray = CSVToArray(data.toString());
@@ -30,7 +34,23 @@ app.get('/',(req,res) => {
         res.send(str);
     })
 })
+app.get('/garbagenotcollected',(req,res) => {
+    fs.readFile('./GarbageNotCollected_YTD.csv',(err,data) => {
+        if (err) throw err;
+        const dataArray = CSVToArray(data.toString());
 
+        var str
+        var i
+        for (i = 0; i < 9; i++) {
+            str += dataArray[1][i];
+            if (i < 5) {
+                str+=" ";
+            }
+        }
+        console.log(str);
+        res.send(str);
+    })
+})
 app.listen(port,() => {
     console.log(`Example app listening at http://localhost:${port}`)
 })

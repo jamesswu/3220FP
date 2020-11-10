@@ -4,12 +4,24 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "csvtojson": "^2.0.10",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon app"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesswu/3220FP.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jamesswu/3220FP/issues"
+  },
+  "homepage": "https://github.com/jamesswu/3220FP#readme"
 }
